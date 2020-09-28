@@ -1,3 +1,4 @@
+
 let initialState = {
   categories: [
     { name: 'jazz', displayName: 'Jazz', description: 'Everything from Louis Armstrong to Thundercat' },
@@ -12,11 +13,13 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case 'CHANGEACTIVE':
-      return { categories: state.categories, activeCategory: payload }
+      return {
+        categories: state.categories,
+        activeCategory: payload
+      }
     default:
       return state;
   }
-
 }
 
 export const changeActiveCategory = name => {

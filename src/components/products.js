@@ -3,12 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Products = props => {
-  console.log(props.products);
   return (
     <>
     <h2>Products</h2>
     <ul>
-
       {props.products.map(product => 
       props.active === product.category && 
         <li key={product.name}
