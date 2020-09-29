@@ -26,8 +26,9 @@ npm start
 When you start the program, click on the different categories to see the different products associated with that category. 
 
 #### Tests
-
-No tests yet
+```
+npm test
+```
 
 #### UML
 ![Lab 36 UML](./umls/lab-36-storefront-uml.png)
