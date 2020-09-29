@@ -2,7 +2,8 @@
 let initialState = {
   categories: [
     { name: 'jazz', displayName: 'Jazz', description: 'Everything from Louis Armstrong to Thundercat' },
-    { name: 'pop', displayName: 'Pop', description: 'Billboard charting hits!' }
+    { name: 'pop', displayName: 'Pop', description: 'Billboard charting hits!' },
+    { name: 'classic_rock', displayName: 'Classic Rock', description: 'Great rock sounds' }
   ],
   activeCategory: 'jazz',
 }
@@ -14,7 +15,7 @@ export default (state = initialState, action) => {
   switch (type) {
     case 'CHANGEACTIVE':
       return {
-        categories: state.categories,
+        ...state,
         activeCategory: payload
       }
     default:
