@@ -14,10 +14,13 @@
 git clone https://github.com/josh-williams-401-advanced-javascript/storefront.git
 cd storefront
 npm i
+touch .env
 ```
 
 #### `.env` requirements
-N/A
+```
+REACT_APP_API=https://api-js401.herokuapp.com/api/v1
+```
 #### How to initialize/run your application (where applicable)
 ```
 npm start

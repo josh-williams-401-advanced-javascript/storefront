@@ -1,31 +1,48 @@
+import axios from 'axios';
+import { loading } from './loading';
+const url = `${process.env.REACT_APP_API}/categories/`;
 
-let initialState = {
-  categories: [
-    { name: 'jazz', displayName: 'Jazz', description: 'Everything from Louis Armstrong to Thundercat' },
-    { name: 'pop', displayName: 'Pop', description: 'Billboard charting hits!' },
-    { name: 'classic_rock', displayName: 'Classic Rock', description: 'Great rock sounds' }
-  ],
-  activeCategory: 'jazz',
-}
-
-export default (state = initialState, action) => {
+export default (state = {categories: []}, action) => {
 
   let { type, payload } = action;
 
   switch (type) {
-    case 'CHANGEACTIVE':
+    case 'CHANGE_ACTIVE':
       return {
         ...state,
         activeCategory: payload
       }
+    case 'GET_CATEGORIES':
+      return {
+        categories: payload,
+        activeCategory: payload[0].name
+      };
     default:
       return state;
   }
 }
 
-export const changeActiveCategory = name => {
-  return {
-    type: 'CHANGEACTIVE',
-    payload: name,
+export const getCategories = () => {
+
+
+  return async dispatch => {
+
+    dispatch(loading(true));
+    let response = await axios({ url, method: 'GET' });
+    // console.log(response.data.results)
+    dispatch(loading(false));
+
+    dispatch({
+      type: 'GET_CATEGORIES',
+      payload: response.data.results
+        .filter(product => product.name !== 'admin')
+    })
+
   }
+
 }
+
+export const changeActiveCategory = name => ({
+  type: 'CHANGE_ACTIVE',
+  payload: name,
+})
