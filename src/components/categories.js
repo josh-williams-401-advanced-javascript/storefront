@@ -9,8 +9,12 @@ const Categories = props => {
   return (
     <>
 
+        <Grid item xs={6}>
       <h2>Categories - Click to change Active Category</h2>
-      <Grid container justify="space-evenly" xs={6}>
+      {/* <Grid container={true} > */}
+
+        <Grid container  justify="space-evenly">
+
         {props.categories.map(category =>
           <Link
             key={category.name}
@@ -20,7 +24,9 @@ const Categories = props => {
             {category.displayName}
           </Link>
         )}
-      </Grid>
+        </Grid>
+        </Grid>
+      {/* </Grid> */}
     </>
   )
 }

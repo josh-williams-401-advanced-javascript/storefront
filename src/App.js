@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { Toolbar } from '@material-ui/core';
 import { AppBar } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import{ Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 
 import Categories from './components/categories';
@@ -18,27 +18,28 @@ export default props => {
     <>
       <CssBaseline />
 
-          <Grid container
-            justify="space-bewteen"
-            alignItems="center"
-            >
-            <AppBar color="transparent" position="relative">
-            <Toolbar container justify="space-bewteen">
-          <Header />
+      <Grid container
+        // justify="space-between"
+        alignItems="center"
+      >
+        <AppBar color="transparent" position="relative">
+          <Toolbar >
+            <Header />
 
-        </Toolbar>
-      </AppBar>
-          <SimpleCart />
-          </Grid>
+          </Toolbar>
+        </AppBar>
+      </Grid>
       <Container>
 
 
 
-
-      <Categories />
-      <Products />
+      <Grid container>
+        <Categories />
+        <SimpleCart />
+        <Products />
+      </Grid>
       </Container>
-        <Footer />
+      <Footer />
     </>
   );
 }
