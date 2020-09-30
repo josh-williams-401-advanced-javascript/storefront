@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, Grid } from '@material-ui/core'
 
 import { changeActiveCategory } from '../store/categories'
 
@@ -7,18 +8,19 @@ import { changeActiveCategory } from '../store/categories'
 const Categories = props => {
   return (
     <>
+
       <h2>Categories - Click to change Active Category</h2>
-      <ul>
+      <Grid container justify="space-evenly" xs={6}>
         {props.categories.map(category =>
-          <li
+          <Link
             key={category.name}
             onClick={() => props.changeActiveCategory(category.name)}
-          >
-            {props.active === category.name && '*'}
+            color={props.active === category.name ? "initial" : "primary"}
+            >
             {category.displayName}
-          </li>
+          </Link>
         )}
-      </ul>
+      </Grid>
     </>
   )
 }
