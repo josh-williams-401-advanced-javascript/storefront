@@ -2,7 +2,7 @@
 
 ### Author: Joshua Williams
 
-### LAB - 9/29/2020 
+### LAB - 9/30/2020 
 
 ### Links and Resources
 
@@ -26,7 +26,7 @@ REACT_APP_API=https://api-js401.herokuapp.com/api/v1
 npm start
 ```
 #### How to use your library (where applicable)
-When you start the program, click on the different categories to see the different products associated with that category. Click add to cart by an item to see it go to the cart section. To see that the inventory is working, 'Miles Davis: Kind of Blue' has a default inventory of only 1. Add it to the cart, and it will be removed from the products. Remove it from the cart, and it will be back in the products.
+When you start the program, click on the different categories to see the different products associated with that category. Click add to cart by an item to see it go to the cart section. Add it to the cart, and the inventory count will go down. Remove it from the cart, and the inventory count will go up.
 
 #### Tests
 Tests show expected initial state, and expected state after changing active category and adding to cart.
@@ -35,4 +35,4 @@ npm test
 ```
 
 #### UML
-![Lab 36 UML](./umls/lab-37-storefront-uml.png)
+![Lab 38 UML](./umls/lab-38-storefront-uml.png)
