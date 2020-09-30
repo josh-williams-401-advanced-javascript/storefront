@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { changeActiveCategory } from '../store/categories'
 
+
 const Categories = props => {
   return (
     <>
