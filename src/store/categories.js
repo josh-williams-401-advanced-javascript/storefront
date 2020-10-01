@@ -15,7 +15,7 @@ export default (state = {categories: []}, action) => {
     case 'GET_CATEGORIES':
       return {
         categories: payload,
-        activeCategory: payload[0].name
+        activeCategory:'' /*payload[0].name*/
       };
     default:
       return state;

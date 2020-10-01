@@ -7,7 +7,7 @@ describe('Render tests', () => {
   it('renders the header correctly', () => {
     render(<App />);
     let headerItems = screen.getAllByRole('heading');
-    expect(headerItems[0].textContent).toBe('Virtual Vinyl Store');
+    expect(headerItems[0].textContent).toBe('Virtual Store');
     expect(headerItems[1].textContent).toBe('Cart (0)');
   })
   it('renders the spinners waiting for content', () => {

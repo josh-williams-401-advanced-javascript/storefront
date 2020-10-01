@@ -10,7 +10,7 @@ const Header = (props) => {
     alignItems="center"
     >
 
-      <Typography variant="h4">Virtual Vinyl Store</Typography>
+      <Typography variant="h4">Virtual Store</Typography>
 
         <Typography variant="h6">Cart ({props.cart.length})</Typography>
 
