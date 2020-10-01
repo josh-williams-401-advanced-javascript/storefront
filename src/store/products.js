@@ -1,31 +1,28 @@
-let initialState = {
-  products: [
-    { category: 'jazz', name: 'John Coltrane: A Love Supreme', description: 'Epic classic', price: '9.99', inventoryCount: 100 },
-    { category: 'jazz', name: 'Miles Davis: Kind of Blue', description: 'Seminal Miles Davis album', price: '11.99', inventoryCount: 1 },
-    { category: 'pop', name: 'Ariana Grande: thank u, next', description: 'Some good tunes', price: '16.99', inventoryCount: 2000 },
-    { category: 'pop', name: 'Ed Sheeran: + (Deluxe Version)', description: 'Peak Ed Sheeran', price: '13.99', inventoryCount: 500 },
-    { category: 'classic_rock', name: 'Pink Floyd: Dark Side of the Moon', description: 'Good stuff', price: '8.99', inventoryCount: 68 }
-  ]
-}
+import axios from 'axios';
+import { loading } from './loading';
 
-export default (state = initialState, action) => {
+const url = `${process.env.REACT_APP_API}/products/`
+
+export default (state = { products:[] }, action) => {
 
   const { type, payload } = action;
   switch (type) {
-    case 'DECREASEINVENTORY':
+    case 'GET_PRODUCTS':
+      return { products: payload };
+    case 'DECREASE_INVENTORY':
       return {
         ...state, products: state.products.map(product => {
-          if (product.name === payload) {
-            product.inventoryCount--;
+          if (product._id === payload._id) {
+            return payload;
           }
           return product;
         })
       }
-    case 'INCREASEINVENTORY':
+    case 'INCREASE_INVENTORY':
       return {
         ...state, products: state.products.map(product => {
-          if (product.name === payload) {
-            product.inventoryCount++;
+          if (product._id === payload._id) {
+            return payload;
           }
           return product;
         })
@@ -34,17 +31,44 @@ export default (state = initialState, action) => {
       return state;
   }
 }
-export const decreaseInventory = name => {
-  return {
-    type: 'DECREASEINVENTORY',
-    payload: name,
+export const decreaseInventory = product => {
+  return async dispatch => {
+
+    product.inStock--;
+    await axios({
+      method: 'PUT',
+      url: `${url}${product._id}`,
+      data: product,
+    });
+
+    dispatch({
+      type: 'DECREASE_INVENTORY',
+      payload: product,
+    });
   }
 }
 
-export const increaseInventory = name => {
-  return {
-    type: 'INCREASEINVENTORY',
-    payload: name,
+export const increaseInventory = product => {
+  return async dispatch => {
+
+    product.inStock++;
+    await axios({
+      method: 'PUT',
+      url: `${url}${product._id}`,
+      data: product,
+    });
+
+    dispatch({
+      type: 'INCREASE_INVENTORY',
+      payload: product,
+    });
   }
 }
-
+export const getProducts = () => {
+  return async dispatch => {
+    dispatch(loading(true));
+    let response = await axios({ method: 'GET', url });
+    dispatch(loading(false));
+    dispatch({ type: 'GET_PRODUCTS', payload: response.data.results })
+  }
+}

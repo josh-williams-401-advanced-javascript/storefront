@@ -1,41 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link, Grid } from '@material-ui/core'
+import { Link, Grid, CircularProgress } from '@material-ui/core'
 
-import { changeActiveCategory } from '../store/categories'
+
+import { changeActiveCategory, getCategories } from '../store/categories'
 
 
 const Categories = props => {
+  const { getCategories, categories, active, changeActiveCategory, loading } = props;
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   return (
-    <>
 
-        <Grid item xs={6}>
-      <h2>Categories - Click to change Active Category</h2>
-      {/* <Grid container={true} > */}
+    <Grid item xs={6}>
+        <h2>Categories - Click to change Active Category</h2>
 
-        <Grid container  justify="space-evenly">
+        <Grid container justify="space-evenly">
 
-        {props.categories.map(category =>
-          <Link
-            key={category.name}
-            onClick={() => props.changeActiveCategory(category.name)}
-            color={props.active === category.name ? "initial" : "primary"}
+    {loading ? <CircularProgress data-testid="spinner" /> :
+          categories.map(category =>
+            <Link
+              key={category.name}
+              onClick={() => changeActiveCategory(category.name)}
+              color={active === category.name ? "initial" : "primary"}
             >
-            {category.displayName}
-          </Link>
-        )}
+              {category.name.toUpperCase()}
+            </Link>
+          )
+        }
         </Grid>
-        </Grid>
-      {/* </Grid> */}
-    </>
+
+      </Grid>
+
   )
 }
 
 const mapStateToProps = store => ({
   categories: store.category.categories,
   active: store.category.activeCategory,
+  loading: store.loadingReducer,
 })
 
-const mapDispatchToProps = { changeActiveCategory };
+const mapDispatchToProps = { changeActiveCategory, getCategories };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

@@ -11,9 +11,9 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const SimpleCart = props => {
   const cart = props.cart;
-  const removeHandler = name => {
-    props.removeFromCart(name);
-    props.increaseInventory(name)
+  const removeHandler = item => {
+    props.removeFromCart(item.name);
+    props.increaseInventory(item)
   }
   return (
     <>
@@ -24,7 +24,7 @@ const SimpleCart = props => {
         {cart.map(item =>
           <ListItem key={item.name}>
             <ListItemText primary={item.name} />
-            <IconButton onClick={() => removeHandler(item.name)}>
+            <IconButton onClick={() => removeHandler(item)}>
               <HighlightOffIcon />
         </IconButton>
           </ListItem>
