@@ -3,16 +3,22 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../store/cart';
 import { decreaseInventory, getProducts } from '../store/products';
-import { CircularProgress, Button, Card, CardContent, Grid, makeStyles, Typography, CardActions } from '@material-ui/core';
+import { CircularProgress, Button, Card, CardContent, Grid, makeStyles, Typography, CardActions, CardMedia } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
   cards: {
     margin: theme.spacing(1.15),
-    minWidth: 275
+    minWidth: 275,
+    height: theme.spacing(40),
+    width: theme.spacing(30),
   },
   cardHolder: {
     padding: theme.spacing(12)
+  },
+  media: {
+    height: '60%',
+    // width: 'inherit'
   }
 
 }));
@@ -46,6 +52,14 @@ const Products = props => {
             props.active === product.category &&
             product.inStock > 0 &&
             <Card key={product.name} className={classes.cards}>
+              <CardMedia
+              className={classes.media}
+              component="img"
+              image={`https://source.unsplash.com/random?${product.name}`}
+              title={product.name}
+              />
+
+              
               <CardContent>
 
                 <Typography
