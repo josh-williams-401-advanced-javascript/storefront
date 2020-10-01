@@ -20,7 +20,7 @@ const Categories = props => {
 
         <Grid container justify="space-evenly">
 
-    {loading ? <CircularProgress /> :
+    {loading ? <CircularProgress data-testid="spinner" /> :
           categories.map(category =>
             <Link
               key={category.name}

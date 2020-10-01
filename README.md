@@ -29,7 +29,7 @@ npm start
 When you start the program, click on the different categories to see the different products associated with that category. Click add to cart by an item to see it go to the cart section. Add it to the cart, and the inventory count will go down. Remove it from the cart, and the inventory count will go up.
 
 #### Tests
-Tests show expected initial state, and expected state after changing active category and adding to cart.
+Tests show expected initial state, and expected state after changing active category and adding to cart. There are additional tests that show that the page renders the correct initail content.
 ```
 npm test
 ```
