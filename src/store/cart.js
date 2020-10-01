@@ -3,7 +3,7 @@ let initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log('in add to cart', state)
+  
   const { type, payload } = action;
   switch (type) {
     case 'ADDTOCART':

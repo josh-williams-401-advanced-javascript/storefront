@@ -52,7 +52,7 @@ const Categories = props => {
       <Grid
         className={classes.mainCat}
         container justify="center" alignItems="center" direction="column">
-        {loading ? <CircularProgress data-testid="spinner" /> :
+        {loading ? <CircularProgress /> :
           <Typography variant="h2">
             {!!active && active.toUpperCase()}
           </Typography>}

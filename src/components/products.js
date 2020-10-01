@@ -28,7 +28,7 @@ const Products = props => {
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-  console.log(props.products)
+  
 
   const buttonHandler = product => {
     props.addToCart(product);
