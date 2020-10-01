@@ -15,7 +15,7 @@ export default (state = {categories: []}, action) => {
     case 'GET_CATEGORIES':
       return {
         categories: payload,
-        activeCategory:'' /*payload[0].name*/
+        activeCategory: '' 
       };
     default:
       return state;
@@ -29,7 +29,6 @@ export const getCategories = () => {
 
     dispatch(loading(true));
     let response = await axios({ url, method: 'GET' });
-    // console.log(response.data.results)
     dispatch(loading(false));
 
     dispatch({
