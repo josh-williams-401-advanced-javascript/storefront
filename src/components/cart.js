@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import { removeFromCart } from '../store/cart'
 import { increaseInventory } from '../store/products'
 
-import { IconButton, Grid } from '@material-ui/core'
+import { IconButton, makeStyles } from '@material-ui/core'
 import { List, ListItem, ListItemText } from '@material-ui/core'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
+const useStyles = makeStyles((theme) => ({
+  list: {
+    position: "fixed",
+    right: theme.spacing(1),
+    top:theme.spacing(7),
+  }
 
+}));
 
 const SimpleCart = props => {
   const cart = props.cart;
@@ -15,12 +22,12 @@ const SimpleCart = props => {
     props.removeFromCart(item.name);
     props.increaseInventory(item)
   }
+  const classes = useStyles();
   return (
     <>
-    <Grid item xs={6}>
-      <Grid container justify="flex-end" position="absolute">
 
-      <List>
+
+      <List className={classes.list}>
         {cart.map(item =>
           <ListItem key={item.name}>
             <ListItemText primary={item.name} />
@@ -30,8 +37,7 @@ const SimpleCart = props => {
           </ListItem>
         )}
       </List>
-      </Grid>
-      </Grid>
+
     </>
   )
 }

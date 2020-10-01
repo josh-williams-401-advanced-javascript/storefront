@@ -19,26 +19,21 @@ export default props => {
       <CssBaseline />
 
       <Grid container
-        // justify="space-between"
         alignItems="center"
       >
         <AppBar color="transparent" position="relative">
           <Toolbar >
             <Header />
-
           </Toolbar>
         </AppBar>
       </Grid>
+
       <Container>
-
-
-
-      <Grid container>
         <Categories />
         <SimpleCart />
         <Products />
-      </Grid>
       </Container>
+
       <Footer />
     </>
   );

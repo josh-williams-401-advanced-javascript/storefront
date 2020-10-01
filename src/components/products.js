@@ -3,16 +3,31 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../store/cart';
 import { decreaseInventory, getProducts } from '../store/products';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Button, Card, CardContent, Grid, makeStyles, Typography, CardActions } from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme) => ({
+  cards: {
+    margin: theme.spacing(1.15),
+    minWidth: 275
+  },
+  cardHolder: {
+    padding: theme.spacing(12)
+  }
+
+}));
+
 
 const Products = props => {
 
+
+  const classes = useStyles();
   const getProducts = props.getProducts;
   const loading = props.loading;
 
   useEffect(() => {
     getProducts();
-  },[getProducts]);
+  }, [getProducts]);
   console.log(props.products)
 
   const buttonHandler = product => {
@@ -20,25 +35,39 @@ const Products = props => {
     props.decreaseInventory(product);
   }
 
+
+
   return (
     <>
-      <h2>Products</h2>
-      {loading ? <CircularProgress /> :
-      <ul>
-        {props.products.map(product =>
-          props.active === product.category &&
-          product.inStock > 0 &&
-          <div key={product.name}>
-            <li
-            >
-              {product.name}
 
-            </li>
-            <span>  In Stock:  {product.inStock}  </span>
-            <button onClick={() => buttonHandler(product)}>Add to Cart</button>
-          </div>
-        )}
-      </ul>
+      {loading ? <CircularProgress /> :
+        <Grid container justify="center" className={classes.cardHolder}>
+          {props.products.map(product =>
+            props.active === product.category &&
+            product.inStock > 0 &&
+            <Card key={product.name} className={classes.cards}>
+              <CardContent>
+
+                <Typography
+                >
+                  {product.name}
+
+                </Typography>
+                <Typography variant="body2">In Stock: {product.inStock}</Typography>
+
+                </CardContent>
+                <CardActions>
+
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={() => buttonHandler(product)}>
+                  Add to Cart
+               </Button>
+                </CardActions>
+            </Card>
+          )}
+        </Grid>
       }
     </>
   );

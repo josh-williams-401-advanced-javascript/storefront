@@ -1,39 +1,67 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link, Grid, CircularProgress } from '@material-ui/core'
-
+import { Grid, CircularProgress, Button, Typography, ButtonGroup } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 
 import { changeActiveCategory, getCategories } from '../store/categories'
 
+const useStyles = makeStyles((theme) => ({
+  categories: {
+    marginTop: theme.spacing(3),
+  },
+  mainCat: {
+    minHeight: theme.spacing(25),
+  }
+
+}));
 
 const Categories = props => {
-  const { getCategories, categories, active, changeActiveCategory, loading } = props;
+  let { getCategories, categories, active, changeActiveCategory, loading } = props;
+
+  const classes = useStyles();
 
   useEffect(() => {
     getCategories();
   }, [getCategories]);
 
   return (
+    <>
+      <Grid container justify="flex-start">
+        <Typography
+          className={classes.categories}
+          variant="h5">Browse Our Categories
+        </Typography>
+      </Grid>
 
-    <Grid item xs={6}>
-        <h2>Categories - Click to change Active Category</h2>
+      {loading ? <CircularProgress data-testid="spinner" /> :
+        <ButtonGroup variant="text" color="primary">
 
-        <Grid container justify="space-evenly">
+          {categories.map((category, i) =>
 
-    {loading ? <CircularProgress data-testid="spinner" /> :
-          categories.map(category =>
-            <Link
-              key={category.name}
+            <Button
+              key={category._id}
               onClick={() => changeActiveCategory(category.name)}
-              color={active === category.name ? "initial" : "primary"}
             >
               {category.name.toUpperCase()}
-            </Link>
-          )
-        }
-        </Grid>
+            </Button>
 
+          )
+          }
+        </ButtonGroup>
+      }
+      <Grid
+        className={classes.mainCat}
+        container justify="center" alignItems="center" direction="column">
+        {loading ? <CircularProgress data-testid="spinner" /> :
+          <Typography variant="h2">
+            {!!active && active.toUpperCase()}
+          </Typography>}
+        <Typography variant="h6">
+          {(categories && active) && categories.filter(cat => cat.name === active)[0].description}
+        </Typography>
       </Grid>
+    </>
+
 
   )
 }
